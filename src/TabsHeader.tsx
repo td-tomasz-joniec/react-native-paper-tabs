@@ -70,10 +70,10 @@ export default function TabsHeader({
 
   // Color (active)	On surface	md.sys.color.on-surface
   // Color (inactive)	On surface variant	md.sys.color.on-surface-variant
-  const textColorV3 = colors.onSurfaceVariant;
   const activeColorV3 = colors.onSurface;
 
-  const textColor = isV3 ? textColorV3 : textColorV2;
+  const textColor =
+    'onSurfaceVariant' in colors ? colors.onSurfaceVariant : textColorV2;
   const activeColor = isV3 ? activeColorV3 : activeColorV2;
 
   const innerScrollSize = React.useRef<number | null>(null);
@@ -224,7 +224,10 @@ export default function TabsHeader({
             style={[
               styles.indicator,
               {
-                backgroundColor: theme.colors.primary,
+                backgroundColor:
+                  'accent' in theme.colors
+                    ? theme.colors.accent
+                    : theme.colors.primary,
               },
               indicatorStyle as any,
             ]}

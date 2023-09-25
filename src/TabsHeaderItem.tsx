@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Animated, StyleSheet, View, Platform } from 'react-native';
 import type { LayoutChangeEvent, TextProps, TextStyle } from 'react-native';
 import { Badge, Text, TouchableRipple } from 'react-native-paper';
-import type { MD3LightTheme } from 'react-native-paper';
+import type { MD2LightTheme, MD3LightTheme } from 'react-native-paper';
 import type { ReactElement } from 'react';
 import type { TabScreenProps } from './TabScreen';
 import Color from 'color';
@@ -39,7 +39,7 @@ export default function TabsHeaderItem({
   onTabLayout: (index: number, e: LayoutChangeEvent) => void;
   activeColor: string;
   textColor: string;
-  theme: typeof MD3LightTheme;
+  theme: typeof MD3LightTheme | typeof MD2LightTheme;
   position: Animated.Value | undefined;
   offset: Animated.Value | undefined;
   childrenCount: number;
@@ -152,7 +152,12 @@ export default function TabsHeaderItem({
               style={[
                 styles.text,
                 iconPosition === 'top' && styles.textTop,
-                { ...theme.fonts.titleSmall, color, opacity },
+                {
+                  ...(('titleSmall' in theme.fonts && theme.fonts.titleSmall) ??
+                    ('medium' in theme.fonts && theme.fonts.medium)),
+                  color,
+                  opacity,
+                },
                 tabLabelStyle,
               ]}
             >

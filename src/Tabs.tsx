@@ -2,7 +2,7 @@ import * as React from 'react';
 import type { ViewStyle, TextStyle } from 'react-native';
 import { withTheme } from 'react-native-paper';
 import Swiper from './Swiper';
-import type { MD3LightTheme } from 'react-native-paper';
+import type { MD2LightTheme, MD3LightTheme } from 'react-native-paper';
 
 import type { IconPosition, Mode } from './utils';
 
@@ -21,7 +21,7 @@ function Tabs({
   ...rest
 }: {
   children: any;
-  theme: typeof MD3LightTheme;
+  theme: typeof MD3LightTheme | typeof MD2LightTheme;
   dark?: boolean;
   style?: ViewStyle;
   iconPosition?: IconPosition;
